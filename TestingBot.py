@@ -29,17 +29,21 @@ boxes = driver.find_elements_by_class_name("ca-element-error-wrapper")
 i = 0
 for box in boxes:
     i = i + 1
-    try:
+    if (box.text == "Any Location"):
         box.click()
-    except:
-        print(i)
+
+box2 = driver.find_elements_by_xpath("//li[@class='active-result']")
+for li in box2:
+    #print(li.text)
+    if li.text == "Pickleball / Mini Tennis":
+        li.click()
 
 #populate the form, may need to click elements to trigger the javascript
 box1 = driver.find_element_by_id("component")
 #box1.click()
 Select(box1).select_by_visible_text("Tennis")
 
-box2 = driver.find_element_by_id("location")
 
-Select(box2).select_by_visible_text("Pickleball / Mini Tennis")
+
+#Select(box2).select_by_visible_text("Pickleball / Mini Tennis")
 #driver.close()
