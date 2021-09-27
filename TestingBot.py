@@ -44,8 +44,8 @@ while not haveRes and ctr < 5:
     wait = WebDriverWait(driver, 10)
     dateBox = wait.until(EC.element_to_be_clickable((By.ID, 'date')))
     dateBox.clear()
-    #dateBox.send_keys(bookDate.strftime("%m/%d/%Y"))
-    dateBox.send_keys(bookDate)
+    dateBox.send_keys(bookDate.strftime("%m/%d/%Y"))
+    #dateBox.send_keys(testDate)
     duration = driver.find_elements_by_xpath('//div[@class="ca-switcher switcher-interval"]/div/*')
     durChosen = "90 Min"
     for d in duration:
@@ -72,11 +72,12 @@ while not haveRes and ctr < 5:
         if li.text == "Pickleball / Mini Tennis":
             li.click()
 
-    time.sleep(5)
+    time.sleep(3)
     subButton = driver.find_element_by_xpath("//button[@id='reserve-court-search']")
     subButton.click()
 
-    go = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'td-blue')))
+    #go = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'td-blue')))
+    time.sleep(1)
     times = driver.find_elements_by_xpath("//td[@class='td-blue']/a")
     desired_times = ["10:30am", "9:30am", "10:00am"]
     if times:
@@ -90,12 +91,13 @@ while not haveRes and ctr < 5:
                     time.sleep(2)
                     driver.find_element_by_xpath("//button[@id='confirm']").click()
                     haveRes = True
+                    time.sleep(2)
                     break
     else:
         print("no times available " + str(ctr))
 
     driver.close()
-    time.sleep(20)
+    time.sleep(10)
 
 
 
