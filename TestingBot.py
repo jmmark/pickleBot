@@ -35,7 +35,7 @@ while not haveLogin and loginCtr < 5:
         pwd.send_keys(userPwd["pwd"])
         pwd.send_keys(Keys.RETURN)
         haveLogin = True
-        emailBodList.append("Login successful on try "+str(loginCtr))
+        emailBodList.append("Login successful on try "+str(loginCtr) + " at " + str(datetime.now().time()))
     except:
         driver.close()
         time.sleep(5)
@@ -113,7 +113,9 @@ while not haveRes and ctr < 10:
         time.sleep(0.5)
         times = driver.find_elements_by_xpath("//td[@class='td-blue']/a")
         if bookDate.weekday() == 6: #booking on Sunday
-            desired_times = ["10:30am", "10:00am", "9:30am"]
+            desired_times = ["10:00am", "11:00am", "10:30am"]
+        elif bookDate.weekday() == 4: #booking on Friday
+            desired_times = ["3:00pm", "2:00pm", "1:00pm"]
         else:
             desired_times = ["10:00am", "11:00am", "10:30am"]
         if times:
@@ -127,7 +129,7 @@ while not haveRes and ctr < 10:
                     emailBodList.append(t.text)
                     if t.text == d:
                         t.click()
-                        time.sleep(1)
+                        time.sleep(0.5)
                         driver.find_element_by_xpath("//button[@id='confirm']").click()
                         haveRes = True
                         #time.sleep(2)
