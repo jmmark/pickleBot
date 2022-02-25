@@ -129,9 +129,15 @@ while not haveRes and ctr < 10:
                     emailBodList.append(t.text)
                     if t.text == d:
                         t.click()
-                        time.sleep(0.5)
-                        driver.find_element_by_xpath("//button[@id='confirm']").click()
-                        haveRes = True
+                        emailBodList.append(d + " clicked")
+                        while (not haveRes):
+                            time.sleep(1.5)
+                            try:
+                                driver.find_element_by_xpath("//button[@id='confirm']").click()
+                                haveRes = True
+                                emailBodList.append(d + "confirmed")
+                            except:
+                                emailBodList.append("problem with confirmation, trying again . . .")
                         #time.sleep(2)
                         break
         else:
