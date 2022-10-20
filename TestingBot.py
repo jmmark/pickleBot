@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import date, timedelta, datetime, time as dtime
 import time
-import send_email
+import send_email_hotmail
 
 #import login info
 userPwd = {}
@@ -113,11 +113,11 @@ while not haveRes and ctr < 10:
         time.sleep(0.5)
         times = driver.find_elements_by_xpath("//td[@class='td-blue']/a")
         if bookDate.weekday() == 6: #booking on Sunday
-            desired_times = ["10:00am", "11:00am", "10:30am"]
+            desired_times = ["4:00pm", "4:30pm", "3:30pm"]
         elif bookDate.weekday() == 4: #booking on Friday
             desired_times = ["3:00pm", "2:00pm", "1:00pm"]
         else:
-            desired_times = ["10:00am", "11:00am", "10:30am"]
+            desired_times = ["10:30am", "9:30am", "10:00am"]
         if times:
             print("times available round " + str(ctr))
             emailBodList.append("times available round " + str(ctr))
@@ -153,7 +153,7 @@ while not haveRes and ctr < 10:
 
 
 driver.quit()
-send_email.sendMail(['jmmarkman@gmail.com'],'PickleBot Ran',"\n".join(emailBodList))
+send_email_hotmail.sendMail(['jmmarkman@gmail.com'],'PickleBot Ran',"\n".join(emailBodList))
 
 
 
